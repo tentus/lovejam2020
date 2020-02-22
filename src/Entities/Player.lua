@@ -24,6 +24,14 @@ Player = Class{
     -- override default health
     health = 3,
     maxHealth = 5,
+
+    -- "current" reflects the index of the unlocked list
+    -- the numbers in "unlocked" correlate to categories in the physics sim
+    -- category 1 is always touchable, while only one of the subsequent cats will be touchable
+    frequency = {
+        current = 1,
+        unlocked = {2, 3, 4},
+    },
 }
 
 
@@ -46,6 +54,21 @@ function Player:update(dt)
     Damagable.update(self, dt)
 
     local xVel, yVel = self.body:getLinearVelocity()
+
+    if (Bindings:pressed('x') or Bindings:pressed('y')) then
+        local f = self.frequency
+        local i = f.current + (Bindings:pressed('x') and 1 or -1)
+
+        if i < 1 then
+            i = #f.unlocked
+        elseif i > #f.unlocked then
+            i = 1
+        end
+
+        f.current = i
+
+        self:setMask()
+    end
 
     if (Bindings:pressed('a') or Bindings:pressed('up'))
         and self.jumps.remaining > 0 then
@@ -84,12 +107,15 @@ end
 
 
 function Player:draw()
+    local x, y = self:bodyPosition()
+
+    love.graphics.print(self.frequency.current, x, y - 96)
+
     -- if we're in the invincibility period, flash red
     if self:invincible() then
         love.graphics.setColor(1, 0, 0)
     end
 
-    local x, y = self:bodyPosition()
     self.anims[self.currentAnim]:draw(self.image, x - self.offsets.x, y - self.offsets.y)
 
     if self:invincible() then
@@ -109,6 +135,8 @@ end
 
 function Player:createBody(world, x, y)
     Physical.createBody(self, world, x, y)
+
+    self:setMask()
 
     self.body:setFixedRotation(true)
 end
@@ -151,4 +179,24 @@ end
 function Player:kill()
     Gamestate.push(DeathScene)
     Stats:add('Deaths')
+end
+
+
+function Player:getFrequency()
+    return self.frequency.unlocked[self.frequency.current]
+end
+
+
+function Player:setMask()
+    local list = {}
+    -- skipping the reserved category 1, blacklist all categories but the current index
+    for i = 2, 8 do
+        if i ~= self:getFrequency() then
+            list[#list + 1] = i
+        end
+    end
+
+    for _, fixture in ipairs(self.fixture) do
+        fixture:setMask(unpack(list))
+    end
 end
