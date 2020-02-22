@@ -25,9 +25,12 @@ Player = Class{
     health = 3,
     maxHealth = 5,
 
+    -- "current" reflects the index of the unlocked list
+    -- the numbers in "unlocked" correlate to categories in the physics sim
+    -- category 1 is always touchable, while only one of the subsequent cats will be touchable
     frequency = {
         current = 1,
-        unlocked = {1, 2, 3},
+        unlocked = {2, 3, 4},
     },
 }
 
@@ -179,10 +182,16 @@ function Player:kill()
 end
 
 
+function Player:getFrequency()
+    return self.frequency.unlocked[self.frequency.current]
+end
+
+
 function Player:setMask()
     local list = {}
-    for i = 1, 8 do
-        if i ~= self.frequency.unlocked[self.frequency.current] then
+    -- skipping the reserved category 1, blacklist all categories but the current index
+    for i = 2, 8 do
+        if i ~= self:getFrequency() then
             list[#list + 1] = i
         end
     end
