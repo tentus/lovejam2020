@@ -4,9 +4,6 @@ WorldScene = {
     entered = false,
     transition = 0,
     transitionLength = 0.25,
-    mapName = 'level-00',
-    --previousMap = 'start',
-    initialSpawn = {}
     -- camera = Camera,
     -- map = sti map,
     -- physics = physics world,
@@ -133,7 +130,6 @@ function WorldScene:loadMap()
     for _, object in pairs(self.map.objects) do
         if object.type == 'Spawn' and object.name == self.previousMap then
             self.player:createBody(self.physics, object.x, object.y)
-            self.initialSpawn = {object.x, object.y}
             object.ent = self.player
             break
         end
