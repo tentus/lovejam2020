@@ -112,8 +112,6 @@ end
 function Player:draw()
     local x, y = self:bodyPosition()
 
-    love.graphics.print(self.frequency.current, x, y - 96)
-
     -- if we're in the invincibility period, flash red
     if self:invincible() then
         love.graphics.setColor(1, 0, 0)
