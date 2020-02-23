@@ -126,14 +126,9 @@ function WorldScene:loadMap()
     end
 
     -- create a body for the player based on the names of the spawn points
-    -- acceptable risk: missing a spawn point
-    for _, object in pairs(self.map.objects) do
-        if object.type == 'Spawn' and object.name == self.previousMap then
-            self.player:createBody(self.physics, object.x, object.y)
-            object.ent = self.player
-            break
-        end
-    end
+    local spawn = self:getSpawnPoint()
+    self.player:createBody(self.physics, spawn.x, spawn.y)
+    spawn.ent = self.player
 
     self:spawnEntities()
 
@@ -146,6 +141,23 @@ function WorldScene:loadMap()
     -- now is a good time to clean up unreachable data.
     -- without this, the texturememory can double over the course of a normal session
     collectgarbage()
+end
+
+
+-- if we do not find a spawn point with a name matching the previous map, we return the last spawn we saw
+function WorldScene:getSpawnPoint()
+    local spawn
+
+    for _, object in pairs(self.map.objects) do
+        if object.type == 'Spawn' then
+            spawn = object
+            if object.name == self.previousMap then
+                return spawn
+            end
+        end
+    end
+
+    return spawn
 end
 
 
