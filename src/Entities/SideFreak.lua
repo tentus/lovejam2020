@@ -39,7 +39,7 @@ end
 
 function SideFreak:draw()
     local x, y = self:bodyPosition()
-    love.graphics.line(self.get)
+    --love.graphics.line(self.get)
     self.sprite:draw(x, y)
 end
 
