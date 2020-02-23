@@ -32,6 +32,9 @@ Player = Class{
         current = 1,
         unlocked = {2, 3, 4},
     },
+
+    -- will be a reference to s Checkpoint object, or the x/y coords we spawned at
+    lastCheckpoint = {},
 }
 
 
@@ -142,6 +145,11 @@ function Player:createBody(world, x, y)
     self:setMask()
 
     self.body:setFixedRotation(true)
+
+    self.lastCheckpoint = {
+        x = x,
+        y = y
+    }
 end
 
 
@@ -202,4 +210,10 @@ function Player:setMask()
     for _, fixture in ipairs(self.fixture) do
         fixture:setMask(unpack(list))
     end
+end
+
+
+function Player:warpToCheckpoint()
+    self.body:setPosition(self.lastCheckpoint.x, self.lastCheckpoint.y)
+    self.lastCheckpoint.queued = false
 end

@@ -4,9 +4,6 @@ WorldScene = {
     entered = false,
     transition = 0,
     transitionLength = 0.25,
-    --mapName = 'level-00',
-    --previousMap = 'start',
-
     -- camera = Camera,
     -- map = sti map,
     -- physics = physics world,
@@ -49,6 +46,10 @@ function WorldScene:update(dt)
     self.camera:update(dt)
     self.physics:update(dt)
     self.map:update(dt)
+
+    if self.player.lastCheckpoint.queued then
+        self.player:warpToCheckpoint()
+    end
 
     for _, object in pairs(self.map.objects) do
         if object.ent and object.ent.update and not object.ent.dead then
