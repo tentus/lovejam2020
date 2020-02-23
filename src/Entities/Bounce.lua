@@ -5,12 +5,13 @@ Bounce = Class{
 
     image = love.graphics.newImage('assets/sprites/sparkle.png'),
 
-    isSensor = true,
+    -- it takes a second before the contact can apply more force
+    charge = 1,
 }
 
 
 function Bounce:init(world, object)
-    self.force = object.properties.force or 1500
+    self.force = object.properties.force or 900
 
     self.width = object.width
     self.height = object.height
@@ -30,12 +31,20 @@ end
 
 
 function Bounce:update(dt)
+    self.charge = self.charge + dt
+
     self.particles:update(dt)
 end
 
 
 function Bounce:draw()
     love.graphics.draw(self.particles)
+
+    --[[for _, shape in ipairs(self.shapes) do
+        love.graphics.polygon("line", {
+            self.body:getWorldPoints(shape:getPoints())
+        })
+    end]]
 end
 
 
@@ -47,5 +56,9 @@ end
 
 
 function Bounce:beginContact(other)
-    other.body:applyLinearImpulse(0, -self.force)
+    if self.charge >= 1 then
+        self.charge = 0
+        local x = other.body:getLinearVelocity()
+        other.body:setLinearVelocity(x, -self.force)
+    end
 end
