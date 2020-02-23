@@ -3,6 +3,9 @@ CreditsScene = {
     logo = SpriteComponent('assets/logos/game_logo.png'),
     text = [[
 
+Brian Donovan
+@smoothieviceroy
+
 Thomas Holden
 @tsholden
 

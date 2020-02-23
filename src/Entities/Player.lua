@@ -176,8 +176,8 @@ function Player:incrementHealth()
 end
 
 
-function Player:heal()
-    self.health = math.min(self.health + 1, self.maxHealth)
+function Player:heal(amount)
+    self.health = math.min(self.health + (amount or 1), self.maxHealth)
 end
 
 

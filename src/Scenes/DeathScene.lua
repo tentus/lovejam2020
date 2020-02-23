@@ -30,10 +30,16 @@ function DeathScene:draw()
 end
 
 function DeathScene:keyreleased()
-    WorldScene:init()
-    Gamestate.pop()
+    if not Fader:isActive() then
+        WorldScene.player:heal(3)
+        WorldScene.player.lastCheckpoint.queued = true
 
-    -- go back to the main theme
-    AudioManager:stream('assets/music/quincy_Theme1.ogg')
+        Gamestate.pop()
+
+        -- go back to the main theme
+        AudioManager:stream('assets/music/quincy_Theme1.ogg')
+
+        Fader:start(1, 1)
+    end
 end
 
