@@ -26,6 +26,14 @@ end
 
 function Door:beginContact(other)
     if other.classname == Player.classname then
-        WorldScene:startTransition(self.name)
+        if self.name == "Victory" then
+            -- force a reset of various aspect
+            WorldScene:init()
+
+            Gamestate.pop()
+            Gamestate.push(CreditsScene)
+        else
+            WorldScene:startTransition(self.name)
+        end
     end
 end

@@ -1,7 +1,6 @@
 local sti = require 'libraries.sti'
 
 WorldScene = {
-    entered = false,
     transition = 0,
     transitionLength = 0.25,
     -- camera = Camera,
@@ -84,7 +83,6 @@ end
 
 
 function WorldScene:enter()
-    self.entered = true
     self:resize(love.window.getMode())
 end
 

@@ -4,6 +4,7 @@ local function value(v)
 end
 
 local function playGame()
+    MenuScene.playing = true
     Gamestate.push(WorldScene)
 end
 
@@ -21,13 +22,14 @@ local function toggleWindowFlag(flag)
 end
 
 MenuScene = {
+    playing = false,
     level = 'root',
     cursor = 1,
     options = {
         root = {   -- top menu
             {
                 function()
-                    return WorldScene.entered and 'Continue' or 'Play'
+                    return MenuScene.playing and 'Continue' or 'Play'
                 end,
                 function()
                     playGame()
@@ -212,7 +214,7 @@ function MenuScene:update(dt)
     elseif Bindings:pressed('b') or Bindings:pressed('pause') then
         if self.level ~= 'root' then
             self:goTo('root')
-        elseif WorldScene.entered then
+        elseif self.playing then
             playGame()
         end
     end
