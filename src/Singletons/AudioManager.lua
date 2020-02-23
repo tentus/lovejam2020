@@ -40,6 +40,10 @@ end
 
 
 function AudioManager:stream(file)
+    if self.streaming then
+        love.audio.stop(self.streaming)
+    end
+
     self.streaming = love.audio.newSource(file, "stream")
     self.streaming:setLooping(true)
     love.audio.play(self.streaming)
