@@ -126,11 +126,14 @@ function Player:draw()
 end
 
 
-function Player:beginContact()
+function Player:beginContact(_, collision)
     -- todo: this makes the assumption that any collision replenishes our jumps.
-    -- we need to add logic to compare the body of the "other" to our own, and see if it's beneath us
     if self.jumps.remaining < self.jumps.max then
-        self.jumps.remaining = self.jumps.remaining + 1
+        -- use the normal of the collision to detect if the hit was below us
+        local _, normalY = collision:getNormal()
+        if normalY < 0 then
+            self.jumps.remaining = self.jumps.remaining + 1
+        end
     end
 end
 

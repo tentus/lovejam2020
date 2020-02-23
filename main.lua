@@ -1,6 +1,7 @@
 Class       = require 'libraries.hump.class'
 Gamestate   = require 'libraries.hump.gamestate'
 lovebird    = require 'libraries.lovebird'
+inspect     = require 'libraries.inspect'
 anim8       = require 'libraries.animation.anim8'
 
 function love.load()
