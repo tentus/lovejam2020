@@ -6,7 +6,7 @@ SideFreak = Class{
     -- drawing stuff
     sprite = SpriteComponent('assets/sprites/side-freak.png'),
 
-    speed = 128,
+    speed = 256,
     direction = 1,
 }
 
@@ -39,7 +39,7 @@ end
 
 function SideFreak:draw()
     local x, y = self:bodyPosition()
-    --love.graphics.line(self.get)
+    love.graphics.line(self.limits.left, y, self.limits.right, y)
     self.sprite:draw(x, y)
 end
 
