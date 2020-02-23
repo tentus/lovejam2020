@@ -30,7 +30,7 @@ Player = Class{
     -- category 1 is always touchable, while only one of the subsequent cats will be touchable
     frequency = {
         current = 1,
-        unlocked = {2, 3, 4},
+        unlocked = {2},
     },
 
     -- will be a reference to s Checkpoint object, or the x/y coords we spawned at
