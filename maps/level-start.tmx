@@ -312,10 +312,10 @@
 </data>
  </layer>
  <objectgroup id="21" name="objects-1">
-  <object id="51" name="start" type="Spawn" x="2848" y="3002">
+  <object id="51" name="level-01" type="Spawn" x="2880" y="3008">
    <point/>
   </object>
-  <object id="88" name="staticVoid" type="StaticVoid" x="2564" y="3264" width="5175" height="128"/>
+  <object id="88" name="staticVoid" type="StaticVoid" x="2560" y="3264" width="5120" height="128"/>
  </objectgroup>
  <layer id="30" name="foreground" width="192" height="96">
   <data encoding="csv">
