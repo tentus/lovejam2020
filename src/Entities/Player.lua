@@ -207,6 +207,6 @@ function Player:setMask()
 end
 
 
-function Player:getLastCheckpoint()
+function Player:setToLastCheckpoint()
 
 end
