@@ -34,5 +34,6 @@ end
 function StaticVoid:beginContact(other)
     if other.classname == Player.classname then
         -- todo: warp you back to the checkpoint on phase death in void
+
     end
 end

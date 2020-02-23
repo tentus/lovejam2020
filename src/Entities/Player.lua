@@ -32,6 +32,8 @@ Player = Class{
         current = 1,
         unlocked = {2, 3, 4},
     },
+
+    lastCheckpoint = {}
 }
 
 
@@ -199,4 +201,9 @@ function Player:setMask()
     for _, fixture in ipairs(self.fixture) do
         fixture:setMask(unpack(list))
     end
+end
+
+
+function Player:getLastCheckpoint()
+
 end
