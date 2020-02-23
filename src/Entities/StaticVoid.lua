@@ -33,7 +33,7 @@ end
 
 function StaticVoid:beginContact(other)
     if other.classname == Player.classname then
-        -- todo: warp you back to the checkpoint on phase death in void
-        other:damage()
+        -- warping is queued, so that we don't crash box2d while it's updating
+        other.lastCheckpoint.queued = true
     end
 end

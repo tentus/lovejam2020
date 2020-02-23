@@ -1,24 +1,23 @@
-
 Checkpoint = Class {
     __includes = {Physical},
     classname = 'Checkpoint',
 
     isSensor = true,
     isOn = false,
-    image = love.graphics.newImage('assets/sprites/static-void.png'),
+
+    base = love.graphics.newImage('assets/sprites/checkpoint-base.png'),
+    crystal = love.graphics.newImage('assets/sprites/checkpoint-crystal.png'),
+
+    width = 64,
+    height = 128,
 }
 
 
 function Checkpoint:init(world, object)
-    self.name = object.name
+    self.x = object.x
+    self.y = object.y
 
-    print(object.width)
-    self.width = object.width
-    self.height = object.height
-    -- Sets the rectangle's dimensions
-    self.quad = love.graphics.newQuad( 0, 0, self.width, self.height, self.image:getDimensions())
-
-    Physical.createBody(self, world, object.x + (self.width / 2), object.y + (self.height / 2))
+    Physical.createBody(self, world, object.x, object.y)
 end
 
 
@@ -30,18 +29,21 @@ end
 
 
 function Checkpoint:draw()
-    return {
-        love.physics.newRectangleShape(self.width, self.height)
-    }
+    -- todo: make this fancy
+    if self.isOn then
+        love.graphics.draw(self.crystal, self.x - (self.width / 2), self.y - (self.height / 2))
+    end
+
+    love.graphics.draw(self.base, self.x - (self.width / 2), self.y)
 end
 
 
 function Checkpoint:beginContact(other)
-    local x, y = self:bodyPosition()
-
-    if other.classname == Player.classname and self.isOn == false then
+    if other.classname == Player.classname then
+        -- turn off the old checkpoint, replace it with us, and then flip us on
+        -- if the old checkpoint is us, well... doesn't matter
+        other.lastCheckpoint.isOn = false
+        other.lastCheckpoint = self
         self.isOn = true
-        Player.checkpoint = {x, y}
-        print(self.isOn);
     end
 end
