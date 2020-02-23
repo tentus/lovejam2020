@@ -4,8 +4,8 @@ WorldScene = {
     entered = false,
     transition = 0,
     transitionLength = 0.25,
-    mapName = 'level-01',
-    previousMap = 'start',
+    --mapName = 'level-00',
+    --previousMap = 'start',
 
     -- camera = Camera,
     -- map = sti map,
@@ -20,7 +20,7 @@ function WorldScene:init()
     self.player = Player()
     self.camera = Camera(self.player)
 
-    self.mapName = 'level-01'
+    self.mapName = 'level-00'
     self.previousMap = 'start'
 
     Inventory.items = {}
