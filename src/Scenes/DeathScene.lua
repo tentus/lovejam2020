@@ -9,6 +9,8 @@ function DeathScene:enter(from)
     self.from = from -- persist previous scene
     self.alpha = 0
     Fader:start(0, 3)
+
+    AudioManager:stream('assets/music/quincy_GameOver.ogg')
 end
 
 function DeathScene:update(dt)
@@ -30,5 +32,8 @@ end
 function DeathScene:keyreleased()
     WorldScene:init()
     Gamestate.pop()
+
+    -- go back to the main theme
+    AudioManager:stream('assets/music/quincy_Theme1.ogg')
 end
 

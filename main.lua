@@ -18,6 +18,8 @@ function love.load()
 
     requireDir('src')
 
+    AudioManager:stream('assets/music/quincy_Theme1.ogg')
+
     love.graphics.setFont(
         love.graphics.newFont(16)
     )

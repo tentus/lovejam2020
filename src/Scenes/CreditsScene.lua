@@ -6,6 +6,8 @@ CreditsScene = {
 Thomas Holden
 @tsholden
 
+Grace Mauro
+@giglet_grace
 
 
 Powered by Love
@@ -13,7 +15,8 @@ love2d.org
 
 
 
-anim8 by Enrique García Cota
+anim8 and inspect by Enrique García Cota
+github.com/kikito/anim8
 github.com/kikito/inspect.lua
 
 Baton by Andrew Minnich
