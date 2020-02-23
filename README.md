@@ -1,4 +1,4 @@
-# lovejam2020
+# Quincy
 A love2d game made for the 2020 jam, "Frequency"
 
 ## Requirements
@@ -8,6 +8,7 @@ Love 11 is required to play.
 Start the game by running `love .` in the root directory.
 
 Use the WASD/arrow keys to move, space to jump, and the Esc key to open the menu.
+Once you have found some unlocks, use E and Q to cycle thru them.
 
 ## Project Organization
 The source code mostly lives in the `src` directory. Any lua file in there will be autoloaded.
