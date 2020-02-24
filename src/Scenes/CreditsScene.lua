@@ -3,17 +3,19 @@ CreditsScene = {
     logo = SpriteComponent('assets/logos/game_logo.png'),
     text = [[
 
+Adrianna Reifinger
+@wryloaf
+
 Brian Donovan
 @smoothieviceroy
-
-Thomas Holden
-@tsholden
 
 Grace Mauro
 @giglet_grace
 
-Adrianna Reifinger
-@wryloaf
+Ian Murray
+
+Thomas Holden
+@tsholden
 
 Tyler Weisman
 
