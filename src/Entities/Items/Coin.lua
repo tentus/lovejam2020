@@ -3,6 +3,8 @@ Coin = Class{
     classname = 'Coin',
 
     sprite = SpriteComponent('assets/sprites/items/coin.png'),
+
+    death_audio = 'assets/sfx/quincy_Coin.ogg',
 }
 
 

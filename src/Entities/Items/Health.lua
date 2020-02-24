@@ -2,6 +2,8 @@ Health = Class{
     __includes = {BaseItem},
     classname = 'Health',
     sprite = SpriteComponent('assets/sprites/items/health.png'),
+
+    death_audio = 'assets/sfx/quincy_Health.ogg',
 }
 
 

@@ -77,6 +77,7 @@ function Player:update(dt)
         and self.jumps.remaining > 0 then
             self.jumps.remaining = self.jumps.remaining - 1
             self.body:applyLinearImpulse(0, -self.jumpForce)
+            AudioManager:play('assets/sfx/quincy_jump.ogg')
     end
 
     local x = Bindings:get('move')
@@ -182,6 +183,7 @@ end
 function Player:damage()
     Damagable.damage(self)
     Stats:add('Damage taken')
+    AudioManager:play('assets/sfx/quincy_Damage.ogg')
 end
 
 
