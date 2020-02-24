@@ -3,6 +3,9 @@ local sti = require 'libraries.sti'
 WorldScene = {
     transition = 0,
     transitionLength = 0.25,
+
+    backgrounds = {},
+
     -- camera = Camera,
     -- map = sti map,
     -- physics = physics world,
@@ -18,6 +21,10 @@ function WorldScene:init()
 
     self.mapName = 'level-00'
     self.previousMap = 'start'
+
+    for i=2, 8 do
+        table.insert(self.backgrounds, i, love.graphics.newImage('assets/backgrounds/' .. i .. '.png'))
+    end
 
     Inventory.items = {}
     Inventory.coins = {}
@@ -70,6 +77,13 @@ end
 
 
 function WorldScene:draw()
+    -- draw fixed-position background
+    local img = self.backgrounds[self.player:getFrequency()]
+    local swidth, sheight = love.window.getMode()
+    local iwidth, iheight = img:getDimensions()
+    local scale = math.max(swidth / iwidth, sheight / iheight)
+    love.graphics.draw(img, 0, 0, 0, scale, scale)
+
     -- determine how much we need to translate around to see the player
     local tx, ty = self.camera:translate()
 
