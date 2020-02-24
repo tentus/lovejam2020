@@ -169,24 +169,26 @@ MenuScene = {
             },
         },
     },
-    lineHeight = 36,
+    lineHeight = 64,
     logo = SpriteComponent('assets/logos/game_logo.png'),
+    cursorSprite = SpriteComponent('assets/sprites/items/unlock.png'),
 }
 
 
 function MenuScene:draw()
     local width, height = love.window.getMode()
-    local halfWidth = width / 2
-    local halfHeight = height / 2
 
-    self.logo:draw(halfWidth, halfHeight - self.logo.y)
+    self.logo:draw((width / 2) - self.logo.x, (height / 2))
+
+    local startX = math.floor(width * 0.66)
+    local startY = (height / 2) - (((#self.options[self.level] + 1) * self.lineHeight) / 2)
 
     for i=1, #self.options[self.level] do
         if i == self.cursor then
-            love.graphics.print('->', halfWidth - 32, halfHeight + (i * self.lineHeight))
+            self.cursorSprite:draw(startX - 32, startY + (i * self.lineHeight))
         end
 
-        love.graphics.print(value(self.options[self.level][i][1]), halfWidth, halfHeight + (i * self.lineHeight))
+        love.graphics.print(value(self.options[self.level][i][1]), startX + 32, startY + (i * self.lineHeight))
     end
 
     Hud:drawFPS()
